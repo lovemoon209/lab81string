@@ -1,0 +1,53 @@
+// Дано літерний рядок, який містить послідовність символів s0, …, sn, …
+// .Відомо, що серед цих символів є по крайній мірі три крапки.
+// 1. Знайти число і таке, що sі – третя за порядком крапка.
+// 2. Замінити кожний четвертий символ крапкою.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int FindThirdDot(const string& s)
+{
+    int dotCount = 0;
+    for (int i = 0; i < (int)s.size(); ++i)
+    {
+        if (s[i] == '.')
+        {
+            dotCount++;
+            if (dotCount == 3)
+                return i; 
+        }
+    }
+    return -1; }
+
+string ReplaceEveryFourth(string s)
+{
+    for (int i = 3; i < (int)s.size(); i += 4)
+    {
+        s[i] = '.';
+    }
+    return s;
+}
+
+int main()
+{
+    string str;
+    cout << "start: ";
+    getline(cin, str);
+
+    int indexThirdDot = FindThirdDot(str);
+    if (indexThirdDot != -1)
+        cout << "index 3 point: " << indexThirdDot << endl;
+    else
+    {
+        cout << "not found point" << endl;
+        return 0;
+    }
+
+    string modified = ReplaceEveryFourth(str);
+
+    cout << "replace: " << modified << endl;
+
+    return 0;
+}
